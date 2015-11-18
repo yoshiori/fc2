@@ -12,7 +12,7 @@ module Fc2
     def use_cache(method_name)
       prepend(Module.new do
         define_method(method_name) do |*args, &block|
-          Fc2.fetch do
+          Fc2.fetch(key: "#{self.class}\##{__method__}") do
             super(*args, &block)
           end
         end
@@ -20,7 +20,8 @@ module Fc2
     end
   end
 
-  def self.fetch(key: Digest::MD5.hexdigest(caller.first), expires_in: 300)
+  def self.fetch(key: caller.first, expires_in: 300)
+    key = Digest::MD5.hexdigest(key)
     path = File.expand_path(key, cache_dir)
     return Marshal.load(File.read(path)) if use_cache?(path, expires_in)
     dump(path, yield)

@@ -59,11 +59,39 @@ describe Fc2 do
         end
       end
     end
+
     it "Create cache and use cache" do
       expect(object).to receive(:b).once.and_call_original
       expect(object.a).to be 1
 
       expect(object.a).to be 1
+    end
+
+    context "setting in two places" do
+      let(:object2) { klass2.new }
+
+      let(:klass2) do
+        Class.new do
+          include Fc2
+          use_cache def a
+            b
+          end
+
+          def b
+            2
+          end
+        end
+      end
+
+      it "Use cache for each" do
+        expect(object).to receive(:b).once.and_call_original
+        expect(object2).to receive(:b).once.and_call_original
+        expect(object.a).to be 1
+        expect(object2.a).to be 2
+
+        expect(object.a).to be 1
+        expect(object2.a).to be 2
+      end
     end
   end
 end
