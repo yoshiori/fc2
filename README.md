@@ -29,7 +29,7 @@ end
 
 or
 
-```
+```ruby
 class Foo
   include Fc2
 
