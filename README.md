@@ -1,6 +1,6 @@
 # Fc2
 
-Very simple file cahce.
+Very simple file cache.
 
 
 ## Installation
