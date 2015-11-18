@@ -2,6 +2,7 @@
 
 Very simple file cahce.
 
+
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -24,6 +25,25 @@ Or install it yourself as:
 hoge = LocalCache.fetch do
   value_of_something
 end
+```
+
+or
+
+```
+class Foo
+  include LocalCache
+
+  use_cache def bar
+    baz
+  end
+
+  def baz
+    "baz"
+  end
+end
+
+Foo.new.bar # create cache
+Foo.new.bar # Use cache(Dot call baz method)
 ```
 
 ## Development

@@ -4,6 +4,22 @@ require "digest/md5"
 require "tmpdir"
 
 module LocalCache
+  def self.included(base)
+    base.extend(ClassMethods)
+  end
+
+  module ClassMethods
+    def use_cache(method_name)
+      prepend(Module.new do
+        define_method(method_name) do |*args, &block|
+          LocalCache.fetch do
+            super(*args, &block)
+          end
+        end
+      end)
+    end
+  end
+
   def self.fetch(key: Digest::MD5.hexdigest(caller.first), expires_in: 300)
     path = File.expand_path(key, cache_dir)
     return Marshal.load(File.read(path)) if use_cache?(path, expires_in)
@@ -11,7 +27,7 @@ module LocalCache
   end
 
   def self.all_clear
-    FileUtils.rm_r(cache_dir, secure: true)
+    FileUtils.rm_r(cache_dir, secure: true) if File.exist? cache_dir
   end
 
   private

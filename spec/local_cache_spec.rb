@@ -44,4 +44,26 @@ describe LocalCache do
       end
     end
   end
+  describe ".use_cache" do
+    let(:object) { klass.new }
+
+    let(:klass) do
+      Class.new do
+        include LocalCache
+        use_cache def a
+          b
+        end
+
+        def b
+          1
+        end
+      end
+    end
+    it "Create cache and use cache" do
+      expect(object).to receive(:b).once.and_call_original
+      expect(object.a).to be 1
+
+      expect(object.a).to be 1
+    end
+  end
 end
