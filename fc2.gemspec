@@ -1,17 +1,17 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'local_cache/version'
+require 'fc2/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "local_cache"
-  spec.version       = LocalCache::VERSION
+  spec.name          = "fc2"
+  spec.version       = Fc2::VERSION
   spec.authors       = ["Yoshiori SHOJI"]
   spec.email         = ["yoshiori@gmail.com"]
 
   spec.summary       = %q{Very simple file cahce.}
   spec.description   = %q{Very simple file cahce.}
-  spec.homepage      = "https://github.com/yoshiori/local_cache"
+  spec.homepage      = "https://github.com/yoshiori/fc2"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }

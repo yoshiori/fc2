@@ -1,4 +1,4 @@
-# LocalCache
+# Fc2
 
 Very simple file cahce.
 
@@ -8,7 +8,7 @@ Very simple file cahce.
 Add this line to your application's Gemfile:
 
 ```ruby
-gem "local_cache"
+gem "fc2"
 ```
 
 And then execute:
@@ -17,12 +17,12 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install local_cache
+    $ gem install fc2
 
 ## Usage
 
 ```ruby
-hoge = LocalCache.fetch do
+hoge = Fc2.fetch do
   value_of_something
 end
 ```
@@ -31,7 +31,7 @@ or
 
 ```
 class Foo
-  include LocalCache
+  include Fc2
 
   use_cache def bar
     baz

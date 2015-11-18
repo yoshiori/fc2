@@ -1,11 +1,11 @@
 require "spec_helper"
 
-describe LocalCache do
+describe Fc2 do
   describe ".fetch" do
     let(:m) do
       Module.new do
         def self.a
-          LocalCache.fetch do
+          Fc2.fetch do
             b
           end
         end
@@ -27,7 +27,7 @@ describe LocalCache do
       let(:m2) do
         Module.new do
           def self.a
-            LocalCache.fetch(expires_in: 0) do
+            Fc2.fetch(expires_in: 0) do
               b
             end
           end
@@ -49,7 +49,7 @@ describe LocalCache do
 
     let(:klass) do
       Class.new do
-        include LocalCache
+        include Fc2
         use_cache def a
           b
         end

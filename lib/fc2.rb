@@ -1,9 +1,9 @@
-require "local_cache/version"
+require "fc2/version"
 
 require "digest/md5"
 require "tmpdir"
 
-module LocalCache
+module Fc2
   def self.included(base)
     base.extend(ClassMethods)
   end
@@ -12,7 +12,7 @@ module LocalCache
     def use_cache(method_name)
       prepend(Module.new do
         define_method(method_name) do |*args, &block|
-          LocalCache.fetch do
+          Fc2.fetch do
             super(*args, &block)
           end
         end
@@ -33,7 +33,7 @@ module LocalCache
   private
 
   def self.cache_dir
-    File.expand_path("local_cache", Dir.tmpdir)
+    File.expand_path("org.yoshiori.fc2", Dir.tmpdir)
   end
 
   def self.use_cache?(path, expires_in)
