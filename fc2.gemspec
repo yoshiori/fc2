@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Yoshiori SHOJI"]
   spec.email         = ["yoshiori@gmail.com"]
 
-  spec.summary       = %q{Very simple file cahce.}
-  spec.description   = %q{Very simple file cahce.}
+  spec.summary       = %q{Very simple file cache.}
+  spec.description   = %q{Very simple file cache.}
   spec.homepage      = "https://github.com/yoshiori/fc2"
   spec.license       = "MIT"
 
